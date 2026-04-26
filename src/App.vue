@@ -1,13 +1,17 @@
 <script>
 import AppHeader from './components/Layout/AppHeader.vue'
+import Background from './components/Layout/background.vue'
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    Background
   }
 }
 </script>
 
 <template>
-  <AppHeader />
+  <Background>
+    <AppHeader />
+  </Background>
 </template>
