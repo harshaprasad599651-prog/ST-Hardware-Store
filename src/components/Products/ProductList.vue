@@ -2,11 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { useTheme } from '../../composables/useTheme'
 import type { Product, ProductResponse } from '../../types/product'
-
+import ProductDetail from './ProductDetail.vue'
+const loading = ref(true)
+const selectedProduct = ref<Product | null>(null)
 const { isLight } = useTheme()
 
 const products = ref<Product[]>([])
-const loading = ref(true)
+
 
 const hardwareNames = [
   'ST Power Drill Pro',
@@ -122,14 +124,27 @@ onMounted(async () => {
               </span>
 
               <button
+                @click="selectedProduct = product"
                 class="text-black text-xs font-bold px-3 py-1.5 rounded bg-yellow-400 hover:bg-yellow-300 transition-colors duration-200"
               >
                 View
-              </button>
+                </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+      <ProductDetail
+      v-if="selectedProduct"
+      :product="selectedProduct"
+      @close="selectedProduct = null"
+      />
+
+
+
   </section>
+
+
+
 </template>
