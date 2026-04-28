@@ -1,13 +1,15 @@
 <template>
-  <section id="tools" class="bg-linear-to-b from-black to-[#111] py-16">
+  <section id="tools" class="py-16 transition-colors duration-300"
+    :class="isLight ? 'bg-gray-50' : 'bg-linear-to-b from-black to-[#111]'">
     <div class="max-w-7xl mx-auto px-6">
-      
+
       <!-- TITLE -->
       <div class="mb-10 text-center">
-        <h2 class="text-3xl font-black text-yellow-400 mb-2">
+        <h2 class="text-3xl font-black mb-2"
+          :class="isLight ? 'text-yellow-600' : 'text-yellow-400'">
           ST Professional Tools
         </h2>
-        <p class="text-gray-400">
+        <p :class="isLight ? 'text-gray-500' : 'text-gray-400'">
           Professional-grade tools engineered with Solid Trust
         </p>
       </div>
@@ -17,9 +19,10 @@
         <div
           v-for="product in toolsData"
           :key="product.id"
-          class="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg overflow-hidden 
-                 hover:border-yellow-400/60 hover:shadow-[0_0_20px_rgba(255,215,0,0.15)] 
-                 transition-all duration-300 group"
+          class="rounded-lg overflow-hidden transition-all duration-300 group"
+          :class="isLight
+            ? 'bg-white border border-gray-200 hover:border-yellow-400/60 hover:shadow-[0_0_20px_rgba(202,138,4,0.15)]'
+            : 'bg-[#1a1a1a] border border-[#2a2a2a] hover:border-yellow-400/60 hover:shadow-[0_0_20px_rgba(255,215,0,0.15)]'"
         >
           <div class="overflow-hidden h-48">
             <img
@@ -30,22 +33,25 @@
           </div>
 
           <div class="p-4">
-            <h3 class="text-yellow-400 font-bold text-sm mb-1">
+            <h3 class="font-bold text-sm mb-1"
+              :class="isLight ? 'text-yellow-600' : 'text-yellow-400'">
               {{ product.name }}
             </h3>
 
-            <p class="text-gray-500 text-xs mb-3 leading-relaxed">
+            <p class="text-xs mb-3 leading-relaxed"
+              :class="isLight ? 'text-gray-500' : 'text-gray-500'">
               {{ product.description }}
             </p>
 
             <div class="flex items-center justify-between">
-              <span class="text-yellow-300 font-black text-lg">
+              <span class="font-black text-lg"
+                :class="isLight ? 'text-yellow-700' : 'text-yellow-300'">
                 {{ product.price }}
               </span>
 
               <button
-                class="bg-yellow-400 text-black text-xs font-bold px-3 py-1.5 rounded 
-                       hover:bg-yellow-300 transition-colors duration-200"
+                class="text-black text-xs font-bold px-3 py-1.5 rounded transition-colors duration-200"
+                :class="isLight ? 'bg-yellow-500 hover:bg-yellow-400' : 'bg-yellow-400 hover:bg-yellow-300'"
               >
                 Add to Cart
               </button>
@@ -59,6 +65,9 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from '../../composables/useTheme'
+const { isLight } = useTheme()
+
 const toolsData = [
   { id: 1, name: 'ST Power Drill Pro', description: 'Heavy-duty cordless drill built on unwavering reliability', price: '$89.99', image: 'https://images.unsplash.com/photo-1770763233593-74dfd0da7bf0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400' },
   { id: 2, name: 'ST Precision Saw', description: 'Professional circular saw - solid performance you can depend on every cut', price: '$149.99', image: 'https://images.unsplash.com/photo-1720594069679-943da72cc1e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400' },
