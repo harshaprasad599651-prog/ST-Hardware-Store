@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import AppHeader from './components/Layout/AppHeader.vue'
 import Background from './components/Layout/Background.vue'
-import Tools from './components/Layout/Tools.vue'
 import Login from './components/Layout/Login.vue'
+import ProductList from './components/Products/ProductList.vue'
 
 const showLogin = ref(false)
 </script>
@@ -11,9 +11,11 @@ const showLogin = ref(false)
 <template>
   <Background>
     <AppHeader @open-login="showLogin = true" />
-    <Tools />
 
-    <!-- Login Modal Overlay -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <ProductList />
+    </main>
+
     <Transition
       enter-active-class="transition duration-200 ease-out"
       enter-from-class="opacity-0"
@@ -30,6 +32,5 @@ const showLogin = ref(false)
         <Login @close="showLogin = false" />
       </div>
     </Transition>
-
   </Background>
 </template>
