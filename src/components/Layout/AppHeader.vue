@@ -49,7 +49,7 @@
             <span class="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">3</span>
           </button>
 
-          <!-- 🌙 Theme Button -->
+          <!-- Theme Button -->
           <button
             class="text-yellow-400 hover:text-white hover:bg-yellow-400/10 p-2 rounded transition-all duration-300"
             aria-label="Theme toggle"
@@ -57,8 +57,10 @@
             🌙
           </button>
 
-          <!-- Login -->
-          <button class="bg-yellow-400 text-black font-black px-6 py-2 rounded-sm hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+          <!-- ✅ Desktop LOGIN — emit added -->
+          <button
+            @click="emit('open-login')"
+            class="bg-yellow-400 text-black font-black px-6 py-2 rounded-sm hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.3)]">
             LOGIN
           </button>
         </nav>
@@ -93,7 +95,7 @@
             v-for="link in navLinks"
             :key="link.href"
             :href="link.href"
-            @click="isOpen=false"
+            @click="isOpen = false"
             class="text-yellow-400 font-bold py-3 px-4 hover:bg-yellow-400/10 rounded"
           >
             {{ link.label }}
@@ -119,15 +121,17 @@
             </button>
           </div>
 
-          <!-- 🌙 Mobile Theme Button -->
+          <!-- Mobile Theme Button -->
           <button
             class="text-yellow-400 font-bold py-2 px-4 hover:bg-yellow-400/10 rounded flex items-center justify-center gap-2 border border-yellow-400/30 mx-4 mt-2"
           >
             🌙 Theme
           </button>
 
-          <!-- Login -->
-          <button class="bg-yellow-400 text-black font-black py-3 px-4 rounded-sm mx-4 mt-2 hover:bg-white transition-all duration-300">
+          <!-- ✅ Mobile LOGIN — emit added -->
+          <button
+            @click="emit('open-login'); isOpen = false"
+            class="bg-yellow-400 text-black font-black py-3 px-4 rounded-sm mx-4 mt-2 hover:bg-white transition-all duration-300">
             LOGIN
           </button>
         </div>
@@ -139,6 +143,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+// ✅ emit and isOpen both defined once — no duplicates
+const emit = defineEmits(['open-login'])
 const isOpen = ref(false)
 
 const navLinks = [
